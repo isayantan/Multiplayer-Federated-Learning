@@ -84,6 +84,7 @@ To implement the algorithm with local steps in codes/QGv16.py, follow these step
   - Generate Game: Initialize the problems with specific parameters. In `model.py`, we provide the code for initialization of Quadratic Minimax Game, Quadratic n-player game. For instance, one initializes the n-player game as follows
     ```python
     from model import NPGame
+    
     game = NPGame(N_PLAYER, N_DIM, N_DATA, L_A, mu_A, L_B, mu_B, device=device)
     ```
     The `NPGame` class has two functions
