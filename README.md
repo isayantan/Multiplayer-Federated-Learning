@@ -52,7 +52,6 @@ To implement the algorithm with local steps in codes/QGv16.py, follow these step
                     
                     with torch.no_grad():
                         x_local[player] -= lr_x * x_local.grad[player]  # Update x_local[player]
-                    # x_local.grad.zero_()  # Zero the gradients for the next update
                 
                 # After N independent updates, copy x_local[player] in x_new[player]
                 with torch.no_grad():
