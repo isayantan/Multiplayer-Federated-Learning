@@ -79,9 +79,9 @@ To reproduce the plots in Figure 4, please run the codes in
 
 ## Implementation
 To implement the algorithm with local steps, follow these steps:
-  - Initialize the Environment: Set the GPU, random seed, and device.
-  - Define Hyperparameters: Set the number of communication rounds `N_COMM`, local steps `N_LOCAL_STEP` and number of players `N_PLAYER`.
-  - Generate Game: Initialize the problems with specific parameters. In `model.py`, we provide the code for initialization of Quadratic Minimax Game, Quadratic n-player game. For instance, one initializes the n-player game as follows
+  - **Initialize the Environment:** Set the GPU, random seed, and device.
+  - **Define Hyperparameters:** Set the number of communication rounds `N_COMM`, local steps `N_LOCAL_STEP` and number of players `N_PLAYER`.
+  - **Generate Game:** Initialize the problems with specific parameters. In `model.py`, we provide the code for initialization of Quadratic Minimax Game, Quadratic n-player game. For instance, one initializes the n-player game as follows
     ```python
     from model import NPGame
     
