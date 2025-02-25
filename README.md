@@ -7,7 +7,7 @@ In this work, we introduce Multiplayer Federated Learning (MpFL), a novel framew
 
 ![Algorithm](images/algorithm.png)
 
-This repository evaluates the performance of PEARL-SGD for solving different N-player games. If you use this code for your research, please cite the paper as follows.
+This repository evaluates the performance of PEARL-SGD for solving different N-player games. If you use this code for your research, please cite the paper as follow:
 
 ```
 @article{yoon2025multiplayer,
@@ -27,7 +27,7 @@ This repository evaluates the performance of PEARL-SGD for solving different N-p
 <!--te-->
 
 ## Quadratic Minimax Game
-In Figure 2 of our paper, we compare the performance of PEARL-SGD for different values of synchronization interval $\tau \in \{ 1, 2, 4, 5, 8\}$. 
+In Figure 2 of our paper, we compare the performance of PEARL-SGD for different values of synchronization interval $\tau \in \left\{ 1, 2, 4, 5, 8 \right \}$. 
 ![Quadratic Minimax Game](images/fig2.png)
 To reproduce the plots in Figure 2, please run the codes in 
   - [Figure 2a](codes/QGv21.ipynb)
