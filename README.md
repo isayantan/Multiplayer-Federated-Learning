@@ -33,34 +33,34 @@ This repository evaluates the performance of PEARL-SGD for solving different N-p
 ## Implementation
 To implement the algorithm with local steps in codes/QGv16.py, follow these steps:
   - Initialize the Environment: Set the GPU, random seed, and device.
-  - Define Hyperparameters: Set the number of communication rounds `N_COMM`, local steps `N_LOCAL_STEP` and number of player `N_PLAYER`.
+  - Define Hyperparameters: Set the number of communication rounds `N_COMM`, local steps `N_LOCAL_STEP` and number of players `N_PLAYER`.
   - Generate Game: Initialize the quadratic game with specific parameters.
   - Run the Algorithm: Perform `N_COMM` rounds of updates:
       1. Update `x_local` for `N_LOCAL_STEP` times while keeping other players constant. Then synchronize
          ```python
          for _ in range(N_COMM):
-          x_new = torch.zeros((N_PLAYER, N_DIM), requires_grad= True).to(device=device)
-          for player in range(N_PLAYER):
-              # save the current values of x before independent updates
-              x_local = x.clone().detach().requires_grad_(True)
-               
-              # perform n_local_step update
-              for _ in range(n_local_step):
-                  x_local.grad = None
-                  loss = game.objective_function(player, x_local)
-                  loss.backward()
-                  
-                  with torch.no_grad():
-                      x_local[player] -= lr_x * x_local.grad[player]  # Update x_local[player]
-                  # x_local.grad.zero_()  # Zero the gradients for the next update
-              
-              # After N independent updates, copy x_local[player] in x_new[player]
-              with torch.no_grad():
-                  x_new[player].copy_(x_local[player])
-          
-          # After N independent updates, synchronize x
-          with torch.no_grad():
-              x.copy_(x_new)
+            x_new = torch.zeros((N_PLAYER, N_DIM), requires_grad= True).to(device=device)
+            for player in range(N_PLAYER):
+                # save the current values of x before independent updates
+                x_local = x.clone().detach().requires_grad_(True)
+                 
+                # perform n_local_step update
+                for _ in range(n_local_step):
+                    x_local.grad = None
+                    loss = game.objective_function(player, x_local)
+                    loss.backward()
+                    
+                    with torch.no_grad():
+                        x_local[player] -= lr_x * x_local.grad[player]  # Update x_local[player]
+                    # x_local.grad.zero_()  # Zero the gradients for the next update
+                
+                # After N independent updates, copy x_local[player] in x_new[player]
+                with torch.no_grad():
+                    x_new[player].copy_(x_local[player])
+            
+            # After N independent updates, synchronize x
+            with torch.no_grad():
+                x.copy_(x_new)
            
          ```
       3. Synchronize all local players after the updates.
