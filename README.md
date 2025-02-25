@@ -27,7 +27,7 @@ This repository evaluates the performance of PEARL-SGD for solving different N-p
 <!--te-->
 
 ## Quadratic Minimax Game
-In Figure 2 of our paper, we compare the performance of PEARL-SGD for different values of synchronization interval $\tau$. 
+In Figure 2 of our paper, we compare the performance of PEARL-SGD for different values of synchronization interval $\tau \in \{ 1, 2, 4, 5, 8\}$. 
 ![Quadratic Minimax Game](images/fig2.png)
 To reproduce the plots in Figure 2, please run the codes in 
   - [Figure 2a](codes/QGv21.ipynb)
