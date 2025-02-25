@@ -91,7 +91,7 @@ To implement the algorithm with local steps, follow these steps:
       - `objective_function(x1, x2)`: computes the functional value for local player `x1`.
       - `opt_dist(x)`: computes the distance of concatenated vector `x` from the optimal solution. 
     The `NPGame`
-  - Run the Algorithm: Perform `N_COMM` rounds of updates:
+  - **Run the Algorithm:** Perform `N_COMM` rounds of updates:
       1. Update `x_local` for `N_LOCAL_STEP` times while keeping other players constant. Then synchronize
          ```python
          for _ in range(N_COMM):
