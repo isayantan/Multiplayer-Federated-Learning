@@ -78,7 +78,7 @@ To reproduce the plots in Figure 4, please run the codes in
   - [Figure 4b](codes/RGv5.py)
 
 ## Implementation
-To implement the algorithm with local steps in codes/QGv16.py, follow these steps:
+To implement the algorithm with local steps, follow these steps:
   - Initialize the Environment: Set the GPU, random seed, and device.
   - Define Hyperparameters: Set the number of communication rounds `N_COMM`, local steps `N_LOCAL_STEP` and number of players `N_PLAYER`.
   - Generate Game: Initialize the problems with specific parameters. In `model.py`, we provide the code for initialization of Quadratic Minimax Game, Quadratic n-player game. For instance, one initializes the n-player game as follows
@@ -118,6 +118,7 @@ To implement the algorithm with local steps in codes/QGv16.py, follow these step
                 x.copy_(x_new)
            
          ```
+         For more details, you can view the full implementation [here](codes/NPv6.py).
  
 
 
