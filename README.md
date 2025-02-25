@@ -37,7 +37,7 @@ To implement the algorithm with local steps in codes/QGv16.py, follow these step
   - Generate Game: Initialize the quadratic game with specific parameters.
   - Run the Algorithm: Perform `N_COMM` rounds of updates:
       1. Update `x1` for `N_LOCAL_STEP` times while keeping `x2` constant.
-         ```
+         ```python
          for local_step in range(n_local_step):
            loss_x1 = game.objective_function(x1_new, x2, index= index[local_step])  # x2 is held constant during x1 updates
            loss_x1.backward()
