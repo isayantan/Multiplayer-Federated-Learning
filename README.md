@@ -18,6 +18,13 @@ This repository evaluates the performance of PEARL-SGD for solving different N-p
 }
 ```
 
+## Table of Contents
+
+<!--ts-->
+   * [2 Player Game](#2-player-game)
+   * [N Player Game](#N-player-game)
+   * [Heatmap](#heatmap)
+<!--te-->
 
 
 
