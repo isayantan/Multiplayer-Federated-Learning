@@ -74,8 +74,8 @@ In Figure 5 of our paper, we evaluate the performance of PEARL-SGD to solve a di
 </p>
 
 To reproduce the plots in Figure 4, please run the codes in 
-  - [Figure 4a](codes/RGv4.py)
-  - [Figure 4b](codes/RGv5.py)
+  - [Figure 5a](codes/RGv4.py)
+  - [Figure 5b](codes/RGv5.py)
 
 ## Implementation
 To implement the algorithm with local steps, follow these steps:
