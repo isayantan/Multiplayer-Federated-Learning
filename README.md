@@ -23,11 +23,22 @@ This repository evaluates the performance of PEARL-SGD for solving different N-p
 ## Table of Contents
 
 <!--ts-->
+   * [Implementation](#implementation)
    * [Quadratic Minimax Game](#quadratic-minimax-game)
    * [Heatmap](#heatmap)
    * [Quadratic n-Player Game](#quadratic-n-player-game)
    * [Distributed Mobile Robot Control](#distributed-mobile-robot-control)
 <!--te-->
+
+## Implementation
+To implement the algorithm with local steps in codes/QGv16.py, follow these steps:
+  - Initialize the Environment: Set the GPU, random seed, and device.
+  - Define Hyperparameters: Set the number of communication rounds `N_COMM` and local steps `N_LOCAL_STEP`.
+  - Generate Game: Initialize the quadratic game with specific parameters.
+  - Run the Algorithm: Perform `N_COMM` rounds of updates:
+      1. Update `x1` for `N_LOCAL_STEP` times while keeping `x2` constant.
+      2. Update `x2` for `N_LOCAL_STEP` times while keeping `x1` constant.
+      3. Synchronize `x1` and `x2` after the updates.
 
 ## Quadratic Minimax Game
 In Figure 2 of our paper, we compare the performance of PEARL-SGD to solve quadratic minimax game for different values of synchronization interval $\tau \in \{ 1, 2, 4, 5, 8 \}$. 
