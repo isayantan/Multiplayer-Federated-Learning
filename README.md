@@ -39,7 +39,8 @@ To reproduce the plots in Figure 2, please run the codes in
 In Figure 3 of our paper, we plot a heatmap for different choices of step size $\gamma$ and synchronization interval $\tau$. 
 
 ![Heatmap](images/heatmap.png)
-To reproduce the Figure 3, please run the codes in [Figure 3](codes/QGdetv1.ipynb)
+
+To reproduce Figure 3, please run the codes in [Figure 3](codes/QGdetv1.ipynb)
   
 ## Quadratic n-Player Game
 In Figure 4 of our paper, we compare the performance of PEARL-SGD to solve a n-player quadratic game for different values of synchronization interval $\tau \in \{ 1, 2, 4, 5, 8 \}$. 
