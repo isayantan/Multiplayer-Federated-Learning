@@ -33,21 +33,29 @@ This repository evaluates the performance of PEARL-SGD for solving different N-p
 ## Implementation
 To implement the algorithm with local steps in codes/QGv16.py, follow these steps:
   - Initialize the Environment: Set the GPU, random seed, and device.
-  - Define Hyperparameters: Set the number of communication rounds `N_COMM` and local steps `N_LOCAL_STEP`.
+  - Define Hyperparameters: Set the number of communication rounds `N_COMM`, local steps `N_LOCAL_STEP` and number of player `N_PLAYER`.
   - Generate Game: Initialize the quadratic game with specific parameters.
   - Run the Algorithm: Perform `N_COMM` rounds of updates:
-      1. Update `x1` for `N_LOCAL_STEP` times while keeping `x2` constant.
+      1. Update `x_local` for `N_LOCAL_STEP` times while keeping other players constant.
          ```python
-         for local_step in range(n_local_step):
-           loss_x1 = game.objective_function(x1_new, x2, index= index[local_step])  # x2 is held constant during x1 updates
-           loss_x1.backward()
-        
-           with torch.no_grad():
-             x1_new -= lr_x1 * x1_new.grad  # x1 update (minimizing)
-             x1_new.grad.zero_()
+         for player in range(N_PLAYER):
+            # save the current values of x before independent updates
+            x_local = x.clone().detach().requires_grad_(True)
+             
+            # perform n_local_step update
+            for _ in range(n_local_step):
+                x_local.grad = None
+                loss = game.objective_function(player, x_local)
+                loss.backward()
+                
+                with torch.no_grad():
+                    x_local[player] -= lr_x * x_local.grad[player]  # Update x_local[player]
          ```
-      3. Update `x2` for `N_LOCAL_STEP` times while keeping `x1` constant.
-      4. Synchronize `x1` and `x2` after the updates.
+      3. Synchronize all local players after the updates.
+         ```python
+         with torch.no_grad():
+                x_new[player].copy_(x_local[player])
+         ```
 
 ## Quadratic Minimax Game
 In Figure 2 of our paper, we compare the performance of PEARL-SGD to solve quadratic minimax game for different values of synchronization interval $\tau \in \{ 1, 2, 4, 5, 8 \}$. 
