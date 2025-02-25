@@ -30,7 +30,11 @@ This repository evaluates the performance of PEARL-SGD for solving different N-p
 
 ## Quadratic Minimax Game
 In Figure 2 of our paper, we compare the performance of PEARL-SGD to solve quadratic minimax game for different values of synchronization interval $\tau \in \{ 1, 2, 4, 5, 8 \}$. 
-![Quadratic Minimax Game](images/fig2.png)
+
+<p align="center">
+  <img src="images/fig2.png" alt="Quadratic Minimax Game">
+</p>
+
 To reproduce the plots in Figure 2, please run the codes in 
   - [Figure 2a](codes/QGv21.ipynb)
   - [Figure 2b](codes/QGv19.ipynb)
@@ -48,7 +52,11 @@ To reproduce Figure 3, please run the codes in [Figure 3](codes/QGdetv1.ipynb)
   
 ## Quadratic n-Player Game
 In Figure 4 of our paper, we compare the performance of PEARL-SGD to solve a n-player quadratic game for different values of synchronization interval $\tau \in \{ 1, 2, 4, 5, 8 \}$. 
-![Quadratic n-Player Game](images/fig4.png)
+
+<p align="center">
+  <img src="images/fig4.png" alt="Quadratic n-Player Game">
+</p>
+
 To reproduce the plots in Figure 4, please run the codes in 
   - [Figure 4a](codes/NPv8.ipynb)
   - [Figure 4b](codes/NPv3.ipynb)
