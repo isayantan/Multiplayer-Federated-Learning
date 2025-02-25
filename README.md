@@ -24,8 +24,9 @@ This repository evaluates the performance of PEARL-SGD for solving different N-p
 
 <!--ts-->
    * [Quadratic Minimax Game](#quadratic-minimax-game)
-   * [Quadratic n-Player Game](#quadratic-n-player-game)
    * [Heatmap](#heatmap)
+   * [Quadratic n-Player Game](#quadratic-n-player-game)
+   * [Distributed Mobile Robot Control](#distributed-mobile-robot-control)
 <!--te-->
 
 ## Quadratic Minimax Game
@@ -62,5 +63,14 @@ To reproduce the plots in Figure 4, please run the codes in
   - [Figure 4b](codes/NPv3.ipynb)
   - [Figure 4c](codes/NPv10.ipynb)
   - [Figure 4d](codes/NPv6.ipynb)
+
+## Distributed Mobile Robot Control
+In Figure 5 of our paper, we evaluate the performance of PEARL-SGD to solve a distributed control problem.
+
+<p align="center">
+  <img src="images/fig5.png" alt="Distributed Control Game">
+</p>
+
+
 
 
