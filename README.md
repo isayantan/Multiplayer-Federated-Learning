@@ -38,7 +38,9 @@ To reproduce the plots in Figure 2, please run the codes in
 ## Heatmap
 In Figure 3 of our paper, we plot a heatmap for different choices of step size $\gamma$ and synchronization interval $\tau$. 
 
-![Heatmap](images/heatmap.png)
+<p align="center">
+  <img src="images/heatmap.png" alt="Heatmap">
+</p>
 
 To reproduce Figure 3, please run the codes in [Figure 3](codes/QGdetv1.ipynb)
   
