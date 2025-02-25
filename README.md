@@ -71,6 +71,12 @@ In Figure 5 of our paper, we evaluate the performance of PEARL-SGD to solve a di
   <img src="images/fig5.png" alt="Distributed Control Game">
 </p>
 
+To reproduce the plots in Figure 4, please run the codes in 
+  - [Figure 4a](codes/RGv4.py)
+  - [Figure 4b](codes/RGv5.py)
+
+
+
 
 
 
