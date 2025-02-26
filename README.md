@@ -114,11 +114,11 @@ To implement the algorithm with local steps, follow these steps:
                     with torch.no_grad():
                         x_local[player] -= lr_x * x_local.grad[player]  # Update x_local[player]
                 
-                # After N independent updates, copy x_local[player] in x_new[player]
+                # After independent updates, copy x_local[player] in x_new[player]
                 with torch.no_grad():
                     x_new[player].copy_(x_local[player])
             
-            # After N independent updates, synchronize x
+            # After independent updates, synchronize x
             with torch.no_grad():
                 x.copy_(x_new)
            
