@@ -121,8 +121,9 @@ To implement the algorithm with local steps, follow these steps:
             with torch.no_grad():
                 x.copy_(x_new)
            
-         ```
-For more details, you can view the full implementation [here](codes/NPv6.py).
+    ```
+
+    For more details, you can view the full implementation [here](codes/NPv6.py).
  
 
 
