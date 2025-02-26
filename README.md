@@ -92,7 +92,9 @@ To implement the algorithm with local steps, follow these steps:
       - `opt_dist(x)`: computes the distance of concatenated vector `x` from the optimal solution. 
     The `NPGame`
   - **Run the Algorithm:** Perform `N_COMM` rounds of updates:
-      1. Update `x_local` for `N_LOCAL_STEP` times while keeping other players constant. Then synchronize
+      1. Update `x_local` for `N_LOCAL_STEP` times while keeping other players constant.
+      2. Then synchronize.
+      Here is the code:
          ```python
          for _ in range(N_COMM):
             x_new = torch.zeros((N_PLAYER, N_DIM), requires_grad= True).to(device=device)
