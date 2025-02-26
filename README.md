@@ -98,6 +98,7 @@ To implement the algorithm with local steps, follow these steps:
     Here is the code:
 
     ```python
+         x = x_start.clone().detach().requires_grad_(True)
          for _ in range(N_COMM):
             x_new = torch.zeros((N_PLAYER, N_DIM), requires_grad= True).to(device=device)
             for player in range(N_PLAYER):
