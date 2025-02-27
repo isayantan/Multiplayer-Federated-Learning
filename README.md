@@ -90,7 +90,7 @@ To implement the algorithm with local steps, follow these steps:
     ```
     The `NPGame` class contains the following methods:
       - `objective_function(player, x)`: computes the objective function value $f_i(\mathbf{x})$ of the player with index `player` (corresponds to $i$), where `x` (corresponds to $\mathbf{x}$) is the joint strategy/action vector of all players.
-      - `opt_dist(x)`: computes the squared distance to the optimal solution $\|\mathbf{x} - \mathbf{x}_\star\|^2$. 
+      - `opt_dist(x)`: computes the squared distance to the optimal solution $\lVert \mathbf{x} - \mathbf{x}_\star \rVert^2$. 
 
   - **Run the Algorithm:** Perform `N_COMM` rounds of local SGD updates, where
       1. Each player updates their own action within `x_local` for `N_LOCAL_STEP` times while keeping other players' action/strategies constant, and
