@@ -9,7 +9,8 @@ In this work, we introduce Multiplayer Federated Learning (MpFL), a novel framew
   <img src="images/algorithm.png" alt="Algorithm">
 </p>
 
-This repository evaluates the performance of PEARL-SGD for solving different N-player games. If you use this code for your research, please cite the paper as follows:
+This repository provides our implementation of PEARL-SGD on different N-player games considered in the [paper](https://arxiv.org/pdf/2501.08263?). 
+If you use this code for your research, please cite the paper as follows:
 
 ```
 @article{yoon2025multiplayer,
@@ -51,7 +52,7 @@ In Figure 3 of our paper, we plot a heatmap for different choices of step size $
   <img src="images/heatmap.png" alt="Heatmap">
 </p>
 
-To reproduce Figure 3, please run the codes in [Figure 3](codes/QGdetv1.ipynb)
+To reproduce Figure 3, please run the codes in [Figure 3](codes/QGdetv1.ipynb).
   
 ## Quadratic n-Player Game
 In Figure 4 of our paper, we compare the performance of PEARL-SGD to solve a n-player quadratic game for different values of synchronization interval $\tau \in \{ 1, 2, 4, 5, 8 \}$. 
@@ -73,7 +74,7 @@ In Figure 5 of our paper, we evaluate the performance of PEARL-SGD to solve a di
   <img src="images/fig5.png" alt="Distributed Control Game">
 </p>
 
-To reproduce the plots in Figure 4, please run the codes in 
+To reproduce the plots in Figure 5, please run the codes in 
   - [Figure 5a](codes/RGv4.py)
   - [Figure 5b](codes/RGv5.py)
 
@@ -81,19 +82,19 @@ To reproduce the plots in Figure 4, please run the codes in
 To implement the algorithm with local steps, follow these steps:
   - **Initialize the Environment:** Set the GPU, random seed, and device.
   - **Define Hyperparameters:** Set the number of communication rounds `N_COMM`, local steps `N_LOCAL_STEP` and number of players `N_PLAYER`.
-  - **Generate Game:** Initialize the problems with specific parameters. In `model.py`, we provide the code for initialization of Quadratic Minimax Game, Quadratic n-player game. For instance, one initializes the n-player game as follows
+  - **Generate Game:** Initialize the problems with specific parameters. In `model.py`, we provide the code for initialization of Quadratic Minimax Game, Quadratic n-player game. For instance, one initializes the n-player game as follows:
     ```python
     from model import NPGame
     
     game = NPGame(N_PLAYER, N_DIM, N_DATA, L_A, mu_A, L_B, mu_B, device=device)
     ```
-    The `NPGame` class has two functions
-      - `objective_function(x1, x2)`: computes the functional value for local player `x1`.
-      - `opt_dist(x)`: computes the distance of concatenated vector `x` from the optimal solution. 
-    The `NPGame`
-  - **Run the Algorithm:** Perform `N_COMM` rounds of updates:
-      1. Update `x_local` for `N_LOCAL_STEP` times while keeping other players constant.
-      2. Then synchronize.
+    The `NPGame` class contains the following methods:
+      - `objective_function(player, x)`: computes the objective function value $f_i(\mathbf{x})$ of the player with index `player` (corresponds to $i$), where `x` (corresponds to $\mathbf{x}$) is the joint strategy/action vector of all players.
+      - `opt_dist(x)`: computes the squared distance to the optimal solution $\|\mathbf{x} - \mathbf{x}_\star\|^2$. 
+
+  - **Run the Algorithm:** Perform `N_COMM` rounds of local SGD updates, where
+      1. Each player updates their own action within `x_local` for `N_LOCAL_STEP` times while keeping other players' action/strategies constant, and
+      2. Then synchronizes with others.
     
     Here is the code:
 
@@ -101,8 +102,8 @@ To implement the algorithm with local steps, follow these steps:
          x = x_start.clone().detach().requires_grad_(True)
          for _ in range(N_COMM):
             x_new = torch.zeros((N_PLAYER, N_DIM), requires_grad= True).to(device=device)
-            for player in range(N_PLAYER):
-                # save the current values of x before independent updates
+            for player in range(N_PLAYER): # In practice, this should be done in parallel, not sequentially
+                # save the current values of x before local updates
                 x_local = x.clone().detach().requires_grad_(True)
                  
                 # perform n_local_step update
@@ -112,19 +113,18 @@ To implement the algorithm with local steps, follow these steps:
                     loss.backward()
                     
                     with torch.no_grad():
-                        x_local[player] -= lr_x * x_local.grad[player]  # Update x_local[player]
+                        x_local[player] -= lr_x * x_local.grad[player]  # Update only player's own action within x_local
                 
-                # After independent updates, copy x_local[player] in x_new[player]
+                # After local updates, synchronize (send updated x_local[player])
                 with torch.no_grad():
                     x_new[player].copy_(x_local[player])
             
-            # After independent updates, synchronize x
             with torch.no_grad():
-                x.copy_(x_new)
+                x.copy_(x_new) # To be distributed to each players in the next communication round
            
     ```
 
-    For more details, you can view the full implementation [here](codes/NPv6.py).
+    For more details, you can view the full implementation [here](codes/model.py).
  
 
 
