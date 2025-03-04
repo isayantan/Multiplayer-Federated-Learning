@@ -12,6 +12,7 @@ In this work, we introduce Multiplayer Federated Learning (MpFL), a novel framew
 This repository provides our implementation of PEARL-SGD on different N-player games considered in the [paper](https://arxiv.org/pdf/2501.08263?). 
 If you use this code for your research, please cite the paper as follows:
 
+
 ```
 @article{yoon2025multiplayer,
   title={Multiplayer federated learning: Reaching equilibrium with less communication},
